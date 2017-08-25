@@ -53,7 +53,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 
 " CtrlP ignores node_modules and dist directory
-let g:ctrlp_custom_ignore = 'node_modules/'
+let g:ctrlp_custom_ignore = { 'dir': 'dist$\|node_modules$' }
 
 " Disables bell sounds
 set noerrorbells visualbell t_vb=
