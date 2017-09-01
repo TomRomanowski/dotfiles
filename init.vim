@@ -7,9 +7,6 @@ syntax on
 filetype plugin indent on
 
 " Theme
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 syntax enable
 colorscheme OceanicNext
@@ -73,7 +70,11 @@ imap jk <Esc>
 
   " Linux/Windows
   nnoremap <A-j> :m .+1<CR>==
-  nnoremap <A-x> :m .-2<CR>==
+  nnoremap <A-k> :m .-2<CR>==
+  inoremap <A-j> <Esc>:m .+1<CR>==gi
+  inoremap <A-k> <Esc>:m .-2<CR>==gi
+  vnoremap <A-j> :m '>+1<CR>gv=gv
+  vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Key mapping to search for visually selected text
 vnoremap // y/<C-R>"<CR>
