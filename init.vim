@@ -4,6 +4,9 @@ set relativenumber
 " Use 'jk' as to go into normal mode
 imap jk <Esc>
 
+" Remap jk to go to normal mode when in terminal mode
+tnoremap jk <C-\><C-n>
+
 " Key mapping to search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
@@ -11,8 +14,8 @@ vnoremap // y/<C-R>"<CR>
 set colorcolumn=80
 
 " Tab settings
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -41,10 +44,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'ternjs/tern_for_vim', { 'do' : 'npm install' }
 
 " Material theme
-Plug 'kaicataldo/material.vim'
-
-let g:material_theme_style = 'dark'
-let g:material_terminal_italics = 1
+Plug 'hzchirs/vim-material'
 
 " Sytax highlighting for javascript
 Plug 'https://github.com/pangloss/vim-javascript.git'
@@ -76,14 +76,17 @@ Plug 'sheerun/vim-polyglot'
 " NerdTree
 Plug 'https://github.com/scrooloose/nerdtree.git'
 
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+
 call plug#end()
 
+let g:material_style = 'oceanic'
 set background=dark
-colorscheme material
+colorscheme vim-material
 
-" use tab to forward cycle
+" use tab to forward cycle for autocomplete
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-" use tab to backward cycle
+" use tab to backward cycle for autocomplete
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
 " replacement for ctrlp
@@ -105,5 +108,14 @@ map <C-n> :NERDTreeToggle<CR>
 " Close nvim if NERDTree is only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Remap jk to go to normal mode when in terminal mode
-tnoremap jk <C-\><C-n>
+" Format some json
+com! FormatJSON %!python -m json.tool
+
+" Key bindings for resizing buffer panes
+noremap <C-j> <C-W>+
+noremap <C-k> <C-W>-
+noremap <C-h> 2<C-W>>
+noremap <C-l> 2<C-W><
+
+" Map Ctrl-c to copy text to system clipboard
+map <C-c> "+y<CR>
