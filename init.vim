@@ -78,6 +78,14 @@ Plug 'https://github.com/scrooloose/nerdtree.git'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 
+Plug 'https://github.com/nvie/vim-flake8.git'
+
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+Plug 'craigemery/vim-autotag'
+
 call plug#end()
 
 let g:material_style = 'oceanic'
@@ -112,10 +120,39 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 com! FormatJSON %!python -m json.tool
 
 " Key bindings for resizing buffer panes
-noremap <C-j> <C-W>+
-noremap <C-k> <C-W>-
-noremap <C-h> 2<C-W>>
-noremap <C-l> 2<C-W><
+noremap <C-j> <C-W>-
+noremap <C-k> <C-W>+
+noremap <C-h> 2<C-W><
+noremap <C-l> 2<C-W>>
 
 " Map Ctrl-c to copy text to system clipboard
 map <C-c> "+y<CR>
+
+" Disable scratch preview window
+set completeopt-=preview
+
+" ~~~Indentation~~~
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4
+autocmd FileType python setlocal ts=4 sts=4 sw=4
+autocmd FileType go setlocal ts=4 sts=4 sw=4
+
+" ~~~Prettier~~~
+let g:prettier#config#tab_width = 4
+let g:prettier#autoformat = 0
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
+let g:prettier#config#arrow_parens = 'avoid'
+let g:prettier#config#trailing_comma = 'none'
+let g:prettier#config#parser = 'babylon'
+
+" ~~~Golang code highlighting~~~
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
