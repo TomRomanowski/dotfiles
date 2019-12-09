@@ -18,6 +18,14 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+" Key mapping to move lines up and down
+
+  " Mac
+  " <A-j>
+  nnoremap ∆ :m .+1<CR>==
+  " <A-k>
+  nnoremap ˚ :m .-2<CR>==
+
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
@@ -86,6 +94,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 Plug 'craigemery/vim-autotag'
 
+Plug 'terryma/vim-multiple-cursors'
+
 call plug#end()
 
 let g:material_style = 'oceanic'
@@ -111,7 +121,7 @@ command! -bang -nargs=* Ag
 map <silent> <C-F> :Ag 
 
 " Remap :NERDTree command
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 
 " Close nvim if NERDTree is only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -144,6 +154,7 @@ let g:prettier#config#jsx_bracket_same_line = 'false'
 let g:prettier#config#arrow_parens = 'avoid'
 let g:prettier#config#trailing_comma = 'none'
 let g:prettier#config#parser = 'babylon'
+let g:prettier#config#single_quote = 'true'
 
 " ~~~Golang code highlighting~~~
 let g:go_highlight_build_constraints = 1
@@ -156,3 +167,6 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
+
+" Disable word wrap
+set wrap!
